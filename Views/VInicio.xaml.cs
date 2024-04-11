@@ -10,30 +10,37 @@ public partial class VInicio : ContentPage
 		InitializeComponent();
 
     }
-    private void ValidateEntry(object sender, TextChangedEventArgs e){
-
-        var entry = (Entry)sender;        
+    private void ValidateEntry(object sender, TextChangedEventArgs e)
+    {
+        var entry = (Entry)sender;
         double value;
-        
-        if (double.TryParse(entry.Text, out value))
+
+        if (!string.IsNullOrWhiteSpace(entry.Text))
         {
-            if (value < 0.1 || value > 10)
+            if (double.TryParse(entry.Text, out value))
             {
-                entry.Text = entry.Text.Substring(0, entry.Text.Length - 1);
-                DisplayAlert("Error", "El valor debe estar entre 0.01 y 10", "OK");
-            }else 
-            if(entry.Text.Substring(entry.Text.IndexOf(".")+ 1).Length>2)
+                if (value < 0.01 || value > 10)
+                {
+                    entry.Text = entry.Text.Substring(0, entry.Text.Length - 1);
+                    DisplayAlert("Error", "El valor debe estar entre 0.01 y 10", "OK");
+                }
+                else if (entry.Text.Contains("."))
+                {
+                    int index = entry.Text.IndexOf(".");
+                    if (entry.Text.Substring(index + 1).Length > 2)
+                    {
+                        entry.Text = e.OldTextValue;
+                    }
+                }
+            }
+            else
             {
-                
+                DisplayAlert("Error", "Solo se permiten números", "OK");
                 entry.Text = e.OldTextValue;
             }
         }
-        else if(entry.Text.Length>0)
-        {
-            DisplayAlert("Error", "Solo se permiten números", "OK");
-            entry.Text = e.OldTextValue;
-        }
     }
+
 
     private void btnSave(object sender, EventArgs e)
     {
@@ -50,12 +57,14 @@ public partial class VInicio : ContentPage
         decimal par2 = (n2 * 0.3m) + (ne2 * 0.2m);
         decimal nf = par1 + par2;
         string estudiante = pkEstudiante.SelectedItem.ToString()!;
+        string date = dpFecha.Date.ToString("dd/MM/yyyy");
         LP1.Text = par1.ToString();
         NotaFinal1.Text=par1.ToString();
         LP2.Text = par2.ToString();
         NotaFinal2.Text= par2.ToString();
         lNF.Text = nf.ToString();
         LEstudiante.Text = estudiante;
+        LFecha.Text = date;
         string msg = "";
         switch (nf)
         {
@@ -73,7 +82,7 @@ public partial class VInicio : ContentPage
                 break;
         }
         LMsg.Text= msg;
-        showAlert(estudiante, par1,par2,msg);
+        showAlert(estudiante, par1,par2,msg, date);
     }
      
     private bool ValidateForm()
@@ -92,9 +101,10 @@ public partial class VInicio : ContentPage
         return false;
     }
 
-    async public void showAlert(string estudiante,decimal par1, decimal par2,string msg)
+    async public void showAlert(string estudiante,decimal par1, decimal par2,string msg,string date)
     {
         await DisplayAlert("Notas Finales", $"Estudiante: {estudiante}\n"+
+            $"Fecha {date}\n"+
             $"Parcial 1: {par1}\n"+
             $"Parcial 2: {par2}\n" +
             $"Nota Final: {par1+par2}\n" +
