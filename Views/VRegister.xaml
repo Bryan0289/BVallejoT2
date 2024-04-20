@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BVallejoT2.Views.VRegister"
+             NavigationPage.HasNavigationBar="False"
+             >
+    <ScrollView>
+
+        <VerticalStackLayout Spacing="10" Padding="10">
+
+            <Frame CornerRadius="10"
+                BackgroundColor="#3d4a6d"
+                Padding="10"
+                Margin="0,0,0,10"
+                >
+                <Grid ColumnDefinitions=".35*,.65*"
+                   RowDefinitions="*,*,*,*,*">
+                    <Label Text="Register"
+                        TextColor="White"
+                        TextTransform="Uppercase"
+                        FontAttributes="Bold"
+                        FontSize="25"
+                        HorizontalTextAlignment="Center"
+                        Grid.ColumnSpan="2"
+                        />
+                    <Label Text="User"
+                        TextColor="White"
+                        VerticalTextAlignment="Center"
+                        Grid.Row="1"
+                        />
+                    <Entry x:Name="txtUser"
+                        Placeholder="User"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        />
+                    <Label Text="Password"
+                        TextColor="White"
+                          
+                        VerticalTextAlignment="Center"
+                        Grid.Row="2"
+                        />
+                    <Entry x:Name="txtPassword"
+                        Placeholder="Password"
+                           IsPassword="True"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        />
+                    <Button BackgroundColor="#0171cf"
+                            x:Name="btnRegister"
+                            Clicked="btnRegister_Clicked"
+                         Text="Register"
+                         Grid.Row="3"
+                         Grid.ColumnSpan="2"
+                         />
+                    <Button BackgroundColor="red"
+                            x:Name="btnLogin"
+                            Clicked="btnLogin_Clicked"
+                         Text="Login"
+                         Grid.Row="4"
+                         Grid.Column="1"
+                         Margin="40,10,0,0"
+                         />
+                </Grid>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
+    

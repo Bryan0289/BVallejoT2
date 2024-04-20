@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BVallejoT2.Views.VInicio"
-             Title="VInicio">
+             NavigationPage.HasNavigationBar="False"
+             >
     <ScrollView>
         <StackLayout Padding="10">
             <VerticalStackLayout>
@@ -19,13 +20,33 @@
                        Padding="10"
                        Margin="0,0,0,10"
                        >
-                    <Grid ColumnDefinitions=".35*,.65*">
+                    <Grid RowDefinitions="*,*"
+                        ColumnDefinitions=".35*,.65*">
+                        <Label x:Name="LUser"
+       TextColor="#3d4a6d"
+       TextTransform="Uppercase"
+                               VerticalTextAlignment="Center"
+       FontAttributes="Bold"
+                               FontSize="30"
+       HorizontalTextAlignment="Center"
+                               Grid.ColumnSpan="2"
+       />
+                        <Button HorizontalOptions="End"
+                                Grid.Column="1"
+                                x:Name="btnLogout"
+                                Clicked="btnLogout_Clicked"
+                                BackgroundColor="Red"
+                                Text="->"
+                                
+                                Padding="10"
+                            />
                         <Label Text="Estudiante:"
                                Grid.Column="0"
                                VerticalTextAlignment="Center"
-                               Grid.Row="0"
+                               Grid.Row="1"
                                />
                         <Picker x:Name="pkEstudiante"
+                                Grid.Row="1"
                                 Grid.Column="1"
                                 >
                             <Picker.Items>

@@ -4,10 +4,14 @@ namespace BVallejoT2.Views;
 
 public partial class VInicio : ContentPage
 {
+    string userName = "";
 
-    public VInicio()
+    public VInicio(string user)
 	{
 		InitializeComponent();
+        userName= user;
+        DisplayAlert("Welcome", $"User {user}", "ok");
+        LUser.Text =$"User: {user}";
 
     }
     private void ValidateEntry(object sender, TextChangedEventArgs e)
@@ -111,5 +115,9 @@ public partial class VInicio : ContentPage
             $"{msg.ToUpper()}" 
             , "OK");
     }
-    
+
+    private void btnLogout_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new VLogin());
+    }
 }

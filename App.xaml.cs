@@ -6,7 +6,7 @@
         {
             InitializeComponent();
 
-            MainPage = new Views.VInicio();
+            MainPage = new NavigationPage( new Views.VLogin());
         }
     }
 }
